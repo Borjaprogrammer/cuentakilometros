@@ -12,11 +12,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Compilar con Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
-        with:
-          command: buildozer -v android debug
-          buildozer_version: master
+      - name: Instalar dependencias Android
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            openjdk-17-jdk \
+            python3-pip \
+            python3-setuptools \
+            python3-wheel \
+            build-essential \
+            git \
+            unzip \
+            zlib1g-dev \
+            libffi-dev \
+            libssl-dev
+
+      - name: Instalar Buildozer
+        run: python3 -m pip install --user buildozer
+
+      - name: Compilar APK
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          buildozer -v android debug
 
       - name: Subir APK generado
         uses: actions/upload-artifact@v4
