@@ -2,6 +2,7 @@
 title = Scooter Pro
 package.name = scooterpro
 package.domain = org.scooterpro
+version = 1.0.0
 source.dir = .
 source.include_exts = py
 requirements = python3,kivy,plyer,android
